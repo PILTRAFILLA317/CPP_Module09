@@ -1,11 +1,11 @@
-NAME = btc
+NAME = RPN
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -std=c++98
 RM = rm -f
 
 FILE =	main \
-		BitcoinExchange \
+		RPN \
 
 SRCS = $(addsuffix .cpp, $(FILE))
 OBJS = $(addsuffix .o, $(FILE))
