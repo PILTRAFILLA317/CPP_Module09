@@ -26,6 +26,7 @@ class BitcoinExchange{
 		BitcoinExchange &operator=(BitcoinExchange const &rhs);
 		
 		void read_file(std::string filename);
+		bool dateChecker(std::string date);
 		bool FechaEsMenor(const Fecha& fecha1, const Fecha& fecha2);
 		Fecha ConvertirFecha(const std::string& fechaStr);
 

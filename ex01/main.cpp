@@ -18,10 +18,6 @@ int main(int argc, char **av) {
 		if (rpn.isNumber(token) == true)
 			c++;
 	}
-	if (c > 10){
-		std::cout << "Error: more than 10 numbers" << std::endl;
-		return 1;
-	}
 	rpn.calculate(input);
 	return 0;
 }

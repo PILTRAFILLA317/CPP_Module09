@@ -31,6 +31,17 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs){
 	return *this;
 }
 
+bool BitcoinExchange::dateChecker(std::string date){
+	Fecha aux = ConvertirFecha(date);
+	if (std::isdigit(aux.año) || std::isdigit(aux.mes) || std::isdigit(aux.dia))
+		return true;
+	if (aux.mes < 1 || aux.mes > 12)
+		return true;
+	if (aux.dia < 1 || aux.dia > 31)
+		return true;
+	return false;
+}
+
 void BitcoinExchange::read_file(std::string filename){
 	std::ifstream file(filename);
 	if (file.is_open()){
@@ -57,8 +68,12 @@ void BitcoinExchange::read_file(std::string filename){
 				std::cout << "Error: not a positive number." << "\n";
 				continue;
 			}
-			if (val >= 2147483647){
+			if (val > 1000){
 				std::cout << "Error: too large a number." << "\n";
+				continue;
+			}
+			if (dateChecker(key)){
+				std::cout << "Error: bad input => " << key << "\n";
 				continue;
 			}
 			Fecha fechaBuscada = ConvertirFecha(key);
@@ -76,6 +91,11 @@ void BitcoinExchange::read_file(std::string filename){
 					final_key = it->first;
 					final_value = it->second;
 				}
+			}
+			std::map<std::string, float>::iterator aux = mapa.begin();
+			Fecha f_aux = ConvertirFecha(aux->first);
+			if (FechaEsMenor(fechaBuscada, f_aux)) {
+				final_value = aux->second;
 			}
 			std::cout << key << " => " << val << " = " << final_value * val << "\n";
 		}

@@ -62,5 +62,8 @@ bool RPN::isNumber(std::string token){
 		}
 		c++;
 	}
+	int i = std::stoi(token);
+	if (i >= 10)
+		return false;
 	return true;
 }
