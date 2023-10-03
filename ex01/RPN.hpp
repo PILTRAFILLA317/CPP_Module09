@@ -15,6 +15,9 @@ class RPN{
 	public:
 		RPN();
 		~RPN();
+		RPN(RPN const &src);
+		RPN &operator=(RPN const &rhs);
+		
 		void calculate(std::string input);
 		bool isOperator(std::string token);
 		bool isNumber(std::string token);

@@ -4,6 +4,17 @@ RPN::RPN(){}
 
 RPN::~RPN(){}
 
+RPN::RPN(RPN const &src){
+	*this = src;
+}
+
+RPN &RPN::operator=(RPN const &rhs){
+	if (this != &rhs){
+		this->pila = rhs.pila;
+	}
+	return *this;
+}
+
 void RPN::calculate(std::string input){
 	std::stringstream stream(input);
 	std::string token;

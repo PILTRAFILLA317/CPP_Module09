@@ -20,6 +20,17 @@ BitcoinExchange::BitcoinExchange(){
 BitcoinExchange::~BitcoinExchange(){
 }
 
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &src){
+	*this = src;
+}
+
+BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs){
+	if (this != &rhs){
+		this->mapa = rhs.mapa;
+	}
+	return *this;
+}
+
 void BitcoinExchange::read_file(std::string filename){
 	std::ifstream file(filename);
 	if (file.is_open()){
