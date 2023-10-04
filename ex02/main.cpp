@@ -53,7 +53,7 @@ int main(int ac, char **av){
 	std::chrono::duration<double> elapsed_seconds = end - start;
 	std::cout << "After: ";
 	p.vec_printer(final);
-	std::cout << "Time to process a range of " << size << " elements with std::vector : " << elapsed_seconds.count() << "s\n";
+	std::cout << "Time to process a range of " << size << " elements with std::vector : " << elapsed_seconds.count() * 1000 << " ms\n";
 
 	for (int i = 1; i < ac; ++i) {
 		result.push_back(atoi(av[i]));
@@ -64,6 +64,6 @@ int main(int ac, char **av){
 	std::deque<int> final2 = p.deq_merge();
 	end = std::chrono::system_clock::now();
 	elapsed_seconds = end - start;
-	std::cout << "Time to process a range of " << size << " elements with std::deque : " << elapsed_seconds.count() << "s\n";
+	std::cout << "Time to process a range of " << size << " elements with std::deque : " << elapsed_seconds.count() * 1000 << " ms\n";
 	return 0;
 }
