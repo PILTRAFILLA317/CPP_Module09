@@ -5,6 +5,11 @@ BitcoinExchange::BitcoinExchange(){
 	if (file.is_open()){
 		std::string line;
 		getline(file, line);
+		if (line != "date,exchange_rate"){
+			std::cout << "Error: invalid CSV" << "\n";
+			file.close();
+			exit(1);
+		}
 		while (getline(file, line)){
 			std::stringstream ss(line);
 			std::string key;

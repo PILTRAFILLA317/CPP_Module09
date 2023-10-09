@@ -23,6 +23,10 @@ void RPN::calculate(std::string input){
 			this->pila.push(token);
 		}
 		else if (this->isOperator(token) == true){
+			if (this->pila.size() < 2){
+				std::cout << "Error: too few values in stack" << std::endl;
+				return;
+			}
 			int a = std::stoi(this->pila.top());
 			this->pila.pop();
 			int b = std::stoi(this->pila.top());
@@ -38,6 +42,10 @@ void RPN::calculate(std::string input){
 			else if (token == "%")
 				this->pila.push(std::to_string(b % a));
 		}
+		else{
+			std::cout << "Error: bad input" << std::endl;
+			return;
+		}
 	}
 	if (this->pila.size() != 1){
 		std::cout << "Error: too many values in stack" << std::endl;
@@ -48,7 +56,8 @@ void RPN::calculate(std::string input){
 
 bool RPN::isOperator(std::string token){
 	const char* tokenchain = token.c_str();
-	if (tokenchain[0] == '+' || tokenchain[0] == '-' || tokenchain[0] == '*' || tokenchain[0] == '/' || tokenchain[0] == '%')
+	if ((tokenchain[0] == '+' || tokenchain[0] == '-' || tokenchain[0] == '*' || tokenchain[0] == '/' || tokenchain[0] == '%')
+		&& !tokenchain[1])
 		return true;
 	return false;
 }
@@ -62,6 +71,8 @@ bool RPN::isNumber(std::string token){
 		}
 		c++;
 	}
+	if (token.length() == 0)
+		return false;
 	int i = std::stoi(token);
 	if (i >= 10)
 		return false;
